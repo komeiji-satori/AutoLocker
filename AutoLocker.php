@@ -10,12 +10,12 @@ function is_offline($device_ip){
 	exec('ping '.$device_ip.' -n 1 -l 1 -w 2000',$sys);
 	$return = $sys[2];
 	$return = iconv("gbk","utf-8",$return);
-	$stime=explode('=1',$return);
+	/*$stime=explode('=1',$return);
 	$ptime=explode('=',$stime[1]);
 	if (@$ptime[1]==NULL) {
 		$ptime[1]='Error';
 	}
-	$pre=explode(' ',@$ptime[1]);
+	$pre=explode(' ',@$ptime[1]);*/
 	if (strstr($return,'无法')||strstr($return,'请求超时')||strstr($return,'Request timed out')) {
 	system('TITLE Device Now is Offline  '.'['.$device_ip.']');
 	system('rundll32.exe user32.dll,LockWorkStation');
@@ -24,7 +24,8 @@ function is_offline($device_ip){
 	return true;
 	}else{
 	system('TITLE Device Now is Online  '.'['.$device_ip.']');
-	echo "[".date('H:i:s')."]".' Device Now is online  Delay:'.$pre[0]."\n";
+	//echo "[".date('H:i:s')."]".' Device Now is online  Delay:'.$pre[0]."\n";
+	echo "[".date('H:i:s')."]".' Device Now is online'."\n";
 	return true;
 	}
 }
